@@ -19,16 +19,27 @@
 </xsl:text>
 
     <!-- Table row for all functions with conditions, i.e., a complexity greater than 1 -->
-    <xsl:apply-templates select="//src:function[.//src:condition]"/>
+    <xsl:apply-templates select="//src:function[.//src:condition]">
+        <xsl:sort select="count(.//src:condition | .//src:condition//src:operator[.='||' or .='&amp;&amp;']) + 1" data-type="number" order="descending"/>
+    </xsl:apply-templates>
 
 </xsl:template>
 
 <!-- Function table row with name and complexity value -->
 <xsl:template match="src:function">
 
-    <xsl:text>| </xsl:text><xsl:value-of select="src:name"/><xsl:text> </xsl:text>
-    <xsl:text>| Complexity | </xsl:text><xsl:value-of select="count(.//src:condition | 
-    .//src:condition//src:operator[.='||' or .='&amp;&amp;']) + 1"/><xsl:text> |
+    <xsl:text>| </xsl:text>
+
+    <xsl:value-of select="src:name"/>
+
+    <xsl:text> </xsl:text>
+    
+    <xsl:text>| Complexity | </xsl:text>
+
+    <xsl:value-of select="count(.//src:condition | 
+    .//src:condition//src:operator[.='||' or .='&amp;&amp;']) + 1"/>
+
+    <xsl:text> |
 </xsl:text>
 
 </xsl:template>
