@@ -28,7 +28,7 @@
 
     <xsl:text>| </xsl:text><xsl:value-of select="src:name"/><xsl:text> </xsl:text>
     <xsl:text>| Complexity | </xsl:text><xsl:value-of select="count(.//src:condition | 
-    .//src:condition//src:operator[.='||' or .='&amp;&amp;'])"/><xsl:text> |
+    .//src:condition//src:operator[.='||' or .='&amp;&amp;']) + 1"/><xsl:text> |
 </xsl:text>
 
 </xsl:template>
